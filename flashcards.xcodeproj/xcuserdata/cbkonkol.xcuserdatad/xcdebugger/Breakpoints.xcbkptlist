@@ -8,11 +8,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "flashcards/flashcardsSecondViewController.m"
-         timestampString = "388085797.703935"
+         timestampString = "388101919.657751"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "46"
-         endingLineNumber = "46"
+         startingLineNumber = "45"
+         endingLineNumber = "45"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -21,11 +21,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "flashcards/flashcardsSecondViewController.m"
-         timestampString = "388085797.703935"
+         timestampString = "388101919.657751"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "91"
-         endingLineNumber = "91"
+         startingLineNumber = "90"
+         endingLineNumber = "90"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -34,11 +34,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "flashcards/flashcardsSecondViewController.m"
-         timestampString = "388094628.688018"
+         timestampString = "388102565.985511"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "209"
-         endingLineNumber = "209"
+         startingLineNumber = "187"
+         endingLineNumber = "187"
          landmarkName = "-buttonIsPressed:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -60,11 +60,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "flashcards/flashcardsSecondViewController.m"
-         timestampString = "388094628.688018"
+         timestampString = "388102565.985511"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "186"
-         endingLineNumber = "186"
+         startingLineNumber = "163"
+         endingLineNumber = "163"
          landmarkName = "-textIsDone:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -73,11 +73,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "flashcards/flashcardsSecondViewController.m"
-         timestampString = "388094628.688018"
+         timestampString = "388102565.985511"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "276"
-         endingLineNumber = "276"
+         startingLineNumber = "255"
+         endingLineNumber = "255"
          landmarkName = "-InitializeAudioFile:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -86,11 +86,24 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "flashcards/flashcardsSecondViewController.m"
-         timestampString = "388094628.688018"
+         timestampString = "388102565.985511"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "278"
-         endingLineNumber = "278"
+         startingLineNumber = "257"
+         endingLineNumber = "257"
+         landmarkName = "-InitializeAudioFile:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "flashcards/flashcardsSecondViewController.m"
+         timestampString = "388102565.985511"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "256"
+         endingLineNumber = "256"
          landmarkName = "-InitializeAudioFile:"
          landmarkType = "5">
       </FileBreakpoint>

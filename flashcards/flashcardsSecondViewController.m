@@ -14,18 +14,18 @@
 @end
 
 @implementation flashcardsSecondViewController
-@synthesize txtView;
 @synthesize ScrollView;
 @synthesize NameID;
 @synthesize myButton;   
-   UITextField * textFieldRounded;
+UITextField * textFieldRounded;
 
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    txtView.Text=@"";
+    
+    
+   
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docsPath = [paths objectAtIndex:0];
     NSString *path = [docsPath stringByAppendingPathComponent:@"cards.sqlite"];
@@ -41,10 +41,9 @@
      FMResultSet *results = [database executeQuery:sql];
      NSLog(@"sql: %@",NameID);
    // FMResultSet *results = [database executeQuery:@"select * from MyWords where NameID= "@NameID];
-  
-    CGFloat row=0;
+     CGFloat row=0;
     while([results next]) {
-        row = row + 50;
+        row = row + 40;
         NSLog(@"row is: %f",row);
         NSString *WordsID = [results stringForColumn:@"WordsID"] ;
         NSString *Word= [results stringForColumn:@"Word"];
@@ -58,14 +57,14 @@
         //create textfield
    
         //set the button size and position
-        if (row==50){
-            self.myButton.frame = CGRectMake(10.0f, 75.0f, 140.0f, 37.0f);
-            textFieldRounded  = [[UITextField alloc] initWithFrame:CGRectMake(170, 75.0f, 140.0f, 37.0f)];
+       if (row==40){
+        self.myButton.frame = CGRectMake(5.0f, 10, 140.0f, 37.0f);
+            textFieldRounded  = [[UITextField alloc] initWithFrame:CGRectMake(170, 10, 140.0f, 37.0f)];
                       //create the text field
-            row = 75;
+            row = 10;
         }
         else{
-            self.myButton.frame = CGRectMake(10.0f, row, 140.0f, 37.0f);
+            self.myButton.frame = CGRectMake(5.0f, row, 140.0f, 37.0f);
             textFieldRounded = [[UITextField alloc] initWithFrame:CGRectMake(170, row, 140.0f, 37.0f)];
 
 
@@ -90,8 +89,8 @@
         //set button tag
         [self.myButton setTag:[WordsID intValue]];
         //add the button to the view
-       [self.view addSubview:self.myButton];
-               
+       //[self.view addSubview:self.myButton];
+       [ScrollView addSubview:self.myButton];
         //add the textfield to the view
         textFieldRounded.borderStyle = UITextBorderStyleRoundedRect;
         
@@ -119,41 +118,16 @@
         // editing ended:
         [textFieldRounded addTarget:self action:@selector(textIsDone:) forControlEvents:UIControlEventEditingDidEnd];
        
-        [self.view addSubview:textFieldRounded];
+        //[self.view addSubview:textFieldRounded];
+        [ScrollView addSubview:textFieldRounded];
     }
-    //Submit delete button
-    // self.view.backgroundColor = [UIColor whiteColor];
-    //create a rounded rectangle type button
-   // self.myButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-   // self.myButton.frame = CGRectMake(10.0f, row + 50.0f, 140.0f, 37.0f);
-    //set the origin of the frame reference
+    ScrollView.minimumZoomScale = 1;
+    ScrollView.maximumZoomScale = 3;
+    ScrollView.delegate = self;
+    [ScrollView setScrollEnabled:YES];
+    ScrollView.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height+20);
     
-   // //set the button title for the normal state
-   // [self.myButton setTitle:@"Score"
-   //                forState:UIControlStateNormal];
-    //set the button title for when the finger is pressing it down
-   // [self.myButton setTitle:@"Saving Score"
-   //                forState:UIControlStateHighlighted];
-    //add action to capture the button press down event
-   // [self.myButton addTarget:self
-    //                  action:@selector(buttonIsPressed:)
-    //        forControlEvents:UIControlEventTouchDown];
-    //add action to capture when the button is released
-   // [self.myButton addTarget:self
-   //                   action:@selector(buttonIsReleased:)
-   //         forControlEvents:UIControlEventTouchUpInside];
-    //set button tag
-   // [self.myButton setTag:1];
-    //add the button to the view
-    //[self.view addSubview:self.myButton];
-    
-    
-    
-    
-    
-    
-    
-    
+
     [results close]; //VERY IMPORTANT!
     [database close];
     
@@ -162,6 +136,9 @@
                                    action:@selector(dismissKeyboard)];
     
     [self.view addGestureRecognizer:tap];
+}
+-(UIView *) viewForZoomingInScrollView:(UIScrollView *)scrollView {
+    return ScrollView;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)theTextField {
@@ -204,6 +181,7 @@
             [self InitializeAudioFile: [NSString stringWithFormat:@"%d%@", paramSender.tag, @".m4a"]];
          
             [self PlayAudio];
+          
             break;
     }
     
@@ -223,7 +201,8 @@
     
 }
 -(void)dismissKeyboard {
-    [txtView resignFirstResponder];
+    [textFieldRounded resignFirstResponder];
+     [textFieldRounded resignFirstResponder];
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView {
@@ -254,7 +233,7 @@ shouldChangeTextInRange:(NSRange)range
 }
 
 - (void)dealloc {
-    [txtView release];
+    [textFieldRounded release];
     [ScrollView release];
     [super dealloc];
 }

@@ -40,7 +40,6 @@
     NSLog(@"Path: %@",path);
     FMDatabase *database = [FMDatabase databaseWithPath:path];
     [database open];
-	// Do any additional setup after loading the view, typically from a nib.
     // Do any additional setup after loading the view, typically from a nib.
     FMResultSet *results = [database executeQuery:@"select * from FlashName"];
     while([results next]) {
@@ -91,23 +90,17 @@
 {
     NSLog(@"Row Selected = %i",indexPath.row);
     
-    //[self performSegueWithIdentifier:@"EmailDetail" sender:self.view];
-    //[self performSegueWithIdentifier:@"EmailDetail" sender:];
-    
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     @try {
-        //5 Replace existing code with below to setproductname and send to seque object item user clicked on menu
         [segue.destinationViewController  setNameID:[listOfNameID objectAtIndex:[self.tableView.indexPathForSelectedRow row]]];
     }
     @catch (NSException *exception) {
         NSLog(@"%@", exception.reason);
     }
-    //5 Replace existing code with below to setproductname and send to seque object item user clicked on menu
-    // [segue.destinationViewController  setEmailSugar:[listOfData objectAtIndex:[self.tableView.indexPathForSelectedRow row]]];
-    
+      
 }
 
 @end

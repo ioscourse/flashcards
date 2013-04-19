@@ -9,13 +9,12 @@
 #import <MessageUI/MessageUI.h>
 #import <UIKit/UIKit.h>
 
-@interface flashcardsSecondViewController : UIViewController  <AVAudioRecorderDelegate, AVAudioPlayerDelegate,UITextFieldDelegate>
+@interface flashcardsSecondViewController : UIViewController  <AVAudioRecorderDelegate, AVAudioPlayerDelegate,UITextFieldDelegate,UIScrollViewDelegate>
 {
     NSString *NameID;
     AVAudioPlayer *player;
       AVAudioRecorder *recorder;
 }
-@property (retain, nonatomic) IBOutlet UITextView *txtView;
 @property (retain, nonatomic) IBOutlet UIScrollView *ScrollView;
 @property (strong, nonatomic) NSString *NameID;
 @property (nonatomic, strong) UIButton *myButton;

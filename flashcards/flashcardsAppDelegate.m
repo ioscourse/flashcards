@@ -37,9 +37,9 @@
     // 4) Add Launch options
     self.databasename = @"cards.sqlite";
     
-    NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentDir = [documentPaths objectAtIndex:0];
-    self.databasepath = [documentDir stringByAppendingPathComponent:self.databasename];
+    documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    documentsDir = [documentPaths objectAtIndex:0];
+    self.databasepath = [documentsDir stringByAppendingPathComponent:self.databasename];
     
     [self createAndCheckDatabase];
     
