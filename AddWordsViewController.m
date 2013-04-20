@@ -153,6 +153,40 @@ int intWordsID;
     [database executeUpdate:sql];
 
     [database close];
+    
+    //audio files deleted for wordlist
+     NSFileManager *fileManager = [NSFileManager defaultManager];
+      [database open];
+    [database beginTransaction];
+    // Do any additional setup after loading the view, typically from a nib.
+    sql = [NSString stringWithFormat:@"select * FROM FlashWords WHERE WordsID = %@", WordIDs,nil];
+    FMResultSet *results = [database executeQuery:sql];
+    NSString *AudioFileName;
+    while([results next]) {
+        NSString *Nameid = [results stringForColumn:@"NameID"];
+        
+        AudioFileName = [NSString stringWithFormat:@"%@%@", Nameid,@".m4a"];
+        NSArray *pathComponents = [NSArray arrayWithObjects:
+                                   [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject],
+                                   AudioFileName,
+                                   nil];
+        NSURL *outputFileURL = [NSURL fileURLWithPathComponents:pathComponents];
+        FilePath=[outputFileURL absoluteString];
+
+          NSLog(@"Path: %@",FilePath);
+        [fileManager removeItemAtPath:FilePath error:NULL];
+    }
+    [results close]; //VERY IMPORTANT!
+    [database commit];
+    [database close];
+    [database open];
+    
+    sql = [NSString stringWithFormat:@"Delete FROM FlashWords WHERE WordsID = %@", WordIDs,nil];
+    [database executeUpdate:sql];
+    
+    [database close];
+
+    
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Success!"
                                                     message: @"WordList Deleted"
                                                    delegate: nil
@@ -247,8 +281,7 @@ int intWordsID;
     [playAudio setEnabled:NO];
 }
 - (IBAction)btnDelete:(id)sender {
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    [fileManager removeItemAtPath:FilePath error:NULL];
+  
      [self DeleteWordList];
      [self LoadDB];
 }

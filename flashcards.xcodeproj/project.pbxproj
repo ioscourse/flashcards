@@ -34,8 +34,8 @@
 		1218A575171F6C270028B97A /* SelectListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1218A574171F6C270028B97A /* SelectListViewController.m */; };
 		12425087172112CB002A09ED /* homeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12425086172112CB002A09ED /* homeViewController.m */; };
 		1242508B1721149D002A09ED /* gameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1242508A1721149D002A09ED /* gameViewController.m */; };
-		125F9CE61721E8DD00C2FB36 /* cards.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 125F9CE51721E8DD00C2FB36 /* cards.sqlite */; };
 		1264CFBC1720F8A90020C6EF /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1218A561171F6A540028B97A /* libsqlite3.0.dylib */; };
+		129BC8D41722E99C002797B8 /* cards.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 129BC8D31722E99C002797B8 /* cards.sqlite */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,7 +82,7 @@
 		12425086172112CB002A09ED /* homeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = homeViewController.m; sourceTree = "<group>"; };
 		124250891721149D002A09ED /* gameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gameViewController.h; sourceTree = "<group>"; };
 		1242508A1721149D002A09ED /* gameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = gameViewController.m; sourceTree = "<group>"; };
-		125F9CE51721E8DD00C2FB36 /* cards.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = cards.sqlite; sourceTree = "<group>"; };
+		129BC8D31722E99C002797B8 /* cards.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = cards.sqlite; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,8 +159,8 @@
 		1218A52A171F628E0028B97A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				125F9CE51721E8DD00C2FB36 /* cards.sqlite */,
 				1218A52B171F628E0028B97A /* flashcards-Info.plist */,
+				129BC8D31722E99C002797B8 /* cards.sqlite */,
 				1218A52C171F628E0028B97A /* InfoPlist.strings */,
 				1218A52F171F628E0028B97A /* main.m */,
 				1218A531171F628E0028B97A /* flashcards-Prefix.pch */,
@@ -286,7 +286,7 @@
 				1218A544171F628E0028B97A /* first@2x.png in Resources */,
 				1218A549171F628E0028B97A /* second.png in Resources */,
 				1218A54B171F628E0028B97A /* second@2x.png in Resources */,
-				125F9CE61721E8DD00C2FB36 /* cards.sqlite in Resources */,
+				129BC8D41722E99C002797B8 /* cards.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

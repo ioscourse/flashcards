@@ -172,20 +172,10 @@ UITextField * textFieldRounded;
     }
 }
 - (void) buttonIsPressed:(UIButton *)paramSender{
-    switch (paramSender.tag) {
-        case 1:
-            NSLog(@"Saving Score.");
-            break;
-        default:
+ 
             NSLog(@"WordsID is: %d",paramSender.tag);
             [self InitializeAudioFile: [NSString stringWithFormat:@"%d%@", paramSender.tag, @".m4a"]];
-         
             [self PlayAudio];
-          
-            break;
-    }
-    
-            NSLog(@"WordsID is: %d",paramSender.tag);
 }
 
 - (void) buttonIsReleased:(UIButton *)paramSender{
