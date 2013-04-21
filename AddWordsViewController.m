@@ -16,7 +16,6 @@
 @synthesize AddWordsPicker;
 @synthesize ScrollView;
 @synthesize playAudio;
-@synthesize stopAudio;
 @synthesize recordAudio;
 
 NSString *FilePath;
@@ -201,7 +200,7 @@ int intWordsID;
 - (void) InitializeAudioFile:(NSString *)filename;
 {
     // Disable Stop/Play button when application launches
-    [stopAudio setEnabled:NO];
+ 
     [playAudio setEnabled:NO];
     
     // Set the audio file
@@ -236,7 +235,7 @@ int intWordsID;
 - (void) audioRecorderDidFinishRecording:(AVAudioRecorder *)avrecorder successfully:(BOOL)flag{
     [recordAudio setTitle:@"Record" forState:UIControlStateNormal];
     
-    [stopAudio setEnabled:NO];
+ 
     [playAudio setEnabled:YES];
 }
 - (void) audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag{
@@ -277,7 +276,7 @@ int intWordsID;
         [recordAudio setTitle:@"Record" forState:UIControlStateNormal];
     }
     
-    [stopAudio setEnabled:YES];
+
     [playAudio setEnabled:NO];
 }
 - (IBAction)btnDelete:(id)sender {
@@ -293,7 +292,11 @@ int intWordsID;
     AVAudioSession *audioSession = [AVAudioSession sharedInstance];
     [audioSession setActive:NO error:nil];
     
-    
+    if (!recorder.recording){
+        player = [[AVAudioPlayer alloc] initWithContentsOfURL:recorder.url error:nil];
+        [player setDelegate:self];
+        [player play];
+    }
 }
 
 @end

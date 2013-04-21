@@ -73,6 +73,13 @@
     [database executeUpdate:@"insert into FlashName(title) values(?)",
      txtListName.text];
     [database close];
-
+    txtListName.text = @"";
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Success"
+                                                    message: @"Word Added!"
+                                                   delegate: nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+    
 }
 @end

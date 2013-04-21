@@ -23,7 +23,6 @@
 @property (retain, nonatomic) IBOutlet UIScrollView *ScrollView;
 
 //Audio Stuff
-@property (retain, nonatomic) IBOutlet UIButton *stopAudio;
 @property (retain, nonatomic) IBOutlet UIButton *recordAudio;
 @property (retain, nonatomic) IBOutlet UIButton *playAudio;
 @property (retain, nonatomic) IBOutlet UITableView *tblView;
