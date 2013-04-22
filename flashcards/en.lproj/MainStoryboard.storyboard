@@ -173,7 +173,6 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="btnAddWords:" destination="ikP-2K-kCr" eventType="touchUpInside" id="0bX-Vz-YC4"/>
                                             <action selector="btnDelete:" destination="ikP-2K-kCr" eventType="touchUpInside" id="s1p-vd-MpL"/>
                                         </connections>
                                     </button>
@@ -556,6 +555,7 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/flashcardsSecondViewController.h"/>
             <relationships>
                 <relationship kind="action" name="doneEditing:"/>
+                <relationship kind="action" name="stopAudio:"/>
                 <relationship kind="outlet" name="ScrollView" candidateClass="UIScrollView"/>
             </relationships>
         </class>

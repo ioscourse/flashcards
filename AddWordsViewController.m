@@ -18,6 +18,7 @@
 @synthesize playAudio;
 @synthesize recordAudio;
 
+int rows;
 NSString *FilePath;
 NSString *WordIDs;
 int intWordsID;
@@ -50,6 +51,8 @@ int intWordsID;
 	// Do any additional setup after loading the view, typically from a nib.
     // Do any additional setup after loading the view, typically from a nib.
     FMResultSet *results = [database executeQuery:@"select * from FlashName"];
+     [listOfData addObject:@"Choose from List Below"];
+     [listOfNameID addObject:@"list"];
     while([results next]) {
         NSString *Nameid = [results stringForColumn:@"NameID"] ;
         NSString *title = [results stringForColumn:@"title"] ;
@@ -117,31 +120,60 @@ int intWordsID;
 }
 //PickerViewController.m
 - (void)pickerView:(UIPickerView *)thePickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    WordIDs=[listOfNameID objectAtIndex:row];
-    NSLog(@"Selected Flash Card: %@. Index of selected Flash Card: %i", WordIDs, row);
+    if (!row==0)
+    {
+     rows=row;
+     WordIDs=[listOfNameID objectAtIndex:row];
+     NSLog(@"Selected Flash Card: %@. Index of selected Flash Card: %i", WordIDs, row);
+    }
+  
 }
 - (IBAction)btnAddWords:(id)sender {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *docsPath = [paths objectAtIndex:0];
-    NSString *path = [docsPath stringByAppendingPathComponent:@"cards.sqlite"];
-    NSLog(@"Path: %@",path);
-    FMDatabase *database = [FMDatabase databaseWithPath:path];
-    [database open];
+    if (rows>0)
+    {
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *docsPath = [paths objectAtIndex:0];
+        NSString *path = [docsPath stringByAppendingPathComponent:@"cards.sqlite"];
+        NSLog(@"Path: %@",path);
+        FMDatabase *database = [FMDatabase databaseWithPath:path];
+        [database open];
         NSLog(@"Path: %@",@"OPenEd DB");
-      NSLog(@"Path: %@",@"OPenEd trans");
+        NSLog(@"Path: %@",@"OPenEd trans");
 	    [database executeUpdate: @"INSERT INTO FlashWords (WordsID,Word,AudioName,NameID) VALUES (NULL,?,?,?)",
-     txtAddWords.text, @"AudioFileName", WordIDs,nil];
-     intWordsID =[database lastInsertRowId];
-     [self InitializeAudioFile: [NSString stringWithFormat:@"%d%@", intWordsID, @".m4a"]];
-     NSLog(@"WordsID: %d",intWordsID);
-    [database close];
-    txtAddWords.Text =@"";
-    [self dismissKeyboard];
+         txtAddWords.text, @"AudioFileName", WordIDs,nil];
+        intWordsID =[database lastInsertRowId];
+        [self InitializeAudioFile: [NSString stringWithFormat:@"%d%@", intWordsID, @".m4a"]];
+        NSLog(@"WordsID: %d",intWordsID);
+        [database close];
+        txtAddWords.Text =@"";
+        [self dismissKeyboard];
+        
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Record Time"
+                                                        message: @"Now, Press Record and Speak the Name"
+                                                       delegate: nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Select WordList"
+                                                        message: @"Select WordList Above"
+                                                       delegate: nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+
+    }
 
 }
 - (void) DeleteWordList
 {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+
+
+          NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docsPath = [paths objectAtIndex:0];
     NSString *path = [docsPath stringByAppendingPathComponent:@"cards.sqlite"];
     NSLog(@"Path: %@",path);
@@ -158,7 +190,7 @@ int intWordsID;
       [database open];
     [database beginTransaction];
     // Do any additional setup after loading the view, typically from a nib.
-    sql = [NSString stringWithFormat:@"select * FROM FlashWords WHERE WordsID = %@", WordIDs,nil];
+    sql = [NSString stringWithFormat:@"select * FROM FlashWords WHERE NameID = %@", WordIDs,nil];
     FMResultSet *results = [database executeQuery:sql];
     NSString *AudioFileName;
     while([results next]) {
@@ -180,7 +212,7 @@ int intWordsID;
     [database close];
     [database open];
     
-    sql = [NSString stringWithFormat:@"Delete FROM FlashWords WHERE WordsID = %@", WordIDs,nil];
+    sql = [NSString stringWithFormat:@"Delete FROM FlashWords WHERE NameID = %@", WordIDs,nil];
     [database executeUpdate:sql];
     
     [database close];
@@ -195,6 +227,8 @@ int intWordsID;
    
 
 
+ 
+    
 }
 //Function to load audio file
 - (void) InitializeAudioFile:(NSString *)filename;
@@ -240,7 +274,7 @@ int intWordsID;
 }
 - (void) audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag{
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Done"
-                                                    message: @"Finish playing the recording!"
+                                                    message: @"Recording Successful!"
                                                    delegate: nil
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];
@@ -256,7 +290,9 @@ int intWordsID;
 }
 - (IBAction)recordAudio:(id)sender
 {
-    // Stop the audio player before recording
+    if (rows>0)
+    {
+         // Stop the audio player before recording
     if (player.playing) {
         [player stop];
     }
@@ -278,25 +314,54 @@ int intWordsID;
     
 
     [playAudio setEnabled:NO];
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Select WordList"
+                                                        message: @"Select WordList Above"
+                                                       delegate: nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
+   
 }
 - (IBAction)btnDelete:(id)sender {
-  
-     [self DeleteWordList];
+     if (rows>0)
+     {
+          [self DeleteWordList];
      [self LoadDB];
-}
+ 
+     }
+     else
+     {
+         UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Select WordList"
+                                                         message: @"Select WordList Above"
+                                                        delegate: nil
+                                               cancelButtonTitle:@"OK"
+                                               otherButtonTitles:nil];
+         [alert show];
+     }
+
+   }
 
 - (IBAction)stopAudio:(id)sender
 {
-    [recorder stop];
+     if (rows>0)
+     {
+         [recorder stop];
     
-    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
-    [audioSession setActive:NO error:nil];
+    //AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+    //[audioSession setActive:NO error:nil];
     
     if (!recorder.recording){
         player = [[AVAudioPlayer alloc] initWithContentsOfURL:recorder.url error:nil];
         [player setDelegate:self];
         [player play];
     }
+ 
+     }
+     
 }
 
 @end
