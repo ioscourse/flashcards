@@ -555,7 +555,6 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/flashcardsSecondViewController.h"/>
             <relationships>
                 <relationship kind="action" name="doneEditing:"/>
-                <relationship kind="action" name="stopAudio:"/>
                 <relationship kind="outlet" name="ScrollView" candidateClass="UIScrollView"/>
             </relationships>
         </class>
